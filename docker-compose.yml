@@ -1,0 +1,20 @@
+services:
+  db:
+    image: postgres:16
+    environment:
+      POSTGRES_DB: shopcart
+      POSTGRES_USER: shopcart
+      POSTGRES_PASSWORD: shopcart_pw
+    volumes:
+      - ./db/init.sql:/docker-entrypoint-initdb.d/init.sql
+    ports:
+      - "5432:5432"
+
+  app:
+    build: ./app
+    depends_on:
+      - db
+    environment:
+      DATABASE_URL: postgres://shopcart:shopcart_pw@db:5432/shopcart
+    ports:
+      - "3000:3000"
