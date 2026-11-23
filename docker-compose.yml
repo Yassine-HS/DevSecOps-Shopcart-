@@ -16,5 +16,7 @@ services:
       - db
     environment:
       DATABASE_URL: postgres://shopcart:shopcart_pw@db:5432/shopcart
+      JWT_SECRET: ${JWT_SECRET}
+      ADMIN_PASSWORD: ${ADMIN_PASSWORD}
     ports:
       - "3000:3000"
